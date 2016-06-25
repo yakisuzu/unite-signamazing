@@ -1,28 +1,28 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
+
+" ------------------------------
+" init
+" ------------------------------
 " init dir
-call unite#util#set_default('g:unite_source_signamazing_directory',
+call unite#util#set_default('g:unite_source_sign_amazing_directory',
       \ unite#get_data_directory() . '/signamazing')
 
+
+" ------------------------------
+" public
+" ------------------------------
 " ---------------
 " if dir not found, make dir
 " @return {void}
 " ---------------
 function! unite#sources#signamazing#make_directory() "{{{
-  if !isdirectory(g:unite_source_signamazing_directory)
+  if !isdirectory(g:unite_source_sign_amazing_directory)
         \ && !unite#util#is_sudo()
-    call mkdir(g:unite_source_signamazing_directory, 'p')
+    call mkdir(g:unite_source_sign_amazing_directory, 'p')
   endif
 endfunction "}}}
-
-" ---------------
-" unite source
-" @type {dict}
-" ---------------
-let s:di_source = {
-      \ 'name' : 'signamazing',
-      \ }
 
 " ---------------
 " @return {dict} unite source
@@ -31,12 +31,17 @@ function! unite#sources#signamazing#define() "{{{
   return s:di_source
 endfunction "}}}
 
+
+" ------------------------------
+" private variable
+" ------------------------------
 " ---------------
-" func utillity
+" unite source
 " @type {dict}
 " ---------------
-let s:di_func = {}
-
+let s:di_source = {
+      \ 'name' : 'signamazing',
+      \ }
 " ---------------
 " gather_candidates func
 " :help unite-source-attribute-gather_candidates
@@ -56,6 +61,12 @@ function! s:di_source.gather_candidates(args, context) "{{{
 
   return li_candidates
 endfunction "}}}
+
+" ---------------
+" func utillity
+" @type {dict}
+" ---------------
+let s:di_func = {}
 
 
 let &cpo = s:save_cpo
